@@ -1,0 +1,1117 @@
+/* Bork-style Animation System */
+:root {
+    --duration-slow: 800ms;
+    --duration-normal: 1000ms;
+    --duration-long: 1200ms;
+    --ease-bork: cubic-bezier(0.4, 0, 0.2, 1);
+    --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+* {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    font-family: 'Manrope', -apple-system, sans-serif;
+    color: #fff;
+    overflow-x: hidden;
+    line-height: 1.6;
+    background-color: #000;
+    /* --- ОБНОВЛЕННЫЙ АНИМИРОВАННЫЙ ФОН --- */
+    
+
+}
+
+/* Bork Background */
+.bork-bg {
+    position: relative;
+}
+
+
+
+/* Bork Reveal Animation */
+.bork-reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: 
+        opacity var(--duration-normal) var(--ease-bork),
+        transform var(--duration-normal) var(--ease-bork);
+}
+
+.bork-reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Subtle Fade */
+.bork-fade {
+    opacity: 0;
+    transition: opacity var(--duration-long) var(--ease-bork);
+}
+
+.bork-fade.visible {
+    opacity: 1;
+}
+
+/* Text Reveal */
+.bork-text-reveal {
+    overflow: hidden;
+    position: relative;
+}
+
+.bork-text-reveal .text {
+    display: inline-block;
+    transform: translateY(100%);
+    transition: transform var(--duration-long) var(--ease-out-expo);
+}
+
+.bork-text-reveal.visible .text {
+    transform: translateY(0);
+}
+
+/* Stagger Delays */
+.delay-100 { transition-delay: 100ms; }
+.delay-200 { transition-delay: 200ms; }
+.delay-300 { transition-delay: 300ms; }
+.delay-400 { transition-delay: 400ms; }
+.delay-500 { transition-delay: 500ms; }
+.delay-600 { transition-delay: 600ms; }
+
+/* Navigation */
+.bork-nav {
+    background-color: #000000; /* Черный непрозрачный фон */
+    /* Убедитесь, что здесь больше нет border-bottom */
+}
+
+.nav-link {
+    position: relative;
+    color: rgba(255, 255, 255, 0.7);
+    transition: color var(--duration-slow) var(--ease-bork);
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: #16a34a;
+    transition: width var(--duration-slow) var(--ease-bork);
+}
+
+.nav-link:hover {
+    color: #fff;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+/* Bork Button */
+.bork-button {
+    position: relative;
+    background: transparent;
+    border: 1px solid rgba(22, 163, 74, 0.3);
+    color: #fff;
+    overflow: hidden;
+    transition: all var(--duration-slow) var(--ease-bork);
+    z-index: 1;
+}
+
+.bork-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: #3b82f6;
+    transition: left var(--duration-slow) var(--ease-bork);
+    z-index: -1;
+}
+
+.bork-button:hover {
+    color: #fff;
+    border-color: #3b82f6;
+}
+
+.bork-button:hover::before {
+    left: 0;
+}
+
+/* Bork Card */
+.bork-card {
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all var(--duration-slow) var(--ease-bork);
+    position: relative;
+    overflow: hidden;
+}
+
+.bork-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(22, 163, 74, 0.05) 0%, transparent 50%);
+    opacity: 0;
+    transition: opacity var(--duration-slow) var(--ease-bork);
+}
+
+.bork-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.bork-card:hover::before {
+    opacity: 1;
+}
+
+/* Hero Section */
+.hero-content {
+    opacity: 0;
+    animation: heroFadeIn 1.5s var(--ease-out-expo) forwards;
+}
+
+@keyframes heroFadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+/* Video Overlay */
+.video-overlay {
+    background: linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0.4) 0%,
+        rgba(0, 0, 0, 0.6) 50%,
+        rgba(0, 0, 0, 0.9) 100%
+    );
+}
+
+/* Image Hover */
+.bork-image-wrapper {
+    overflow: hidden;
+    position: relative;
+}
+
+.bork-image-wrapper img {
+    transition: transform var(--duration-long) var(--ease-bork);
+}
+
+.bork-image-wrapper:hover img {
+    transform: scale(1.02);
+}
+
+.bork-image-wrapper::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    transition: opacity var(--duration-slow) var(--ease-bork);
+}
+
+.bork-image-wrapper:hover::after {
+    opacity: 1;
+}
+
+/* ЗАМЕНИТЬ НА ЭТОТ КОД */
+.gradient-text-subtle {
+    background: linear-gradient(135deg, #fff 0%, #3b82f6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Counter */
+.bork-counter {
+    font-variant-numeric: tabular-nums;
+}
+
+/* --- Стили для FAQ --- */
+.faq-item {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    transition: all 0.4s ease;
+    overflow: hidden;
+}
+.faq-item:not(:last-child) {
+    margin-bottom: 1rem;
+}
+.faq-item:hover {
+    border-color: rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.04);
+}
+.faq-item:hover .faq-icon-wrapper {
+    border-color: #22c55e;
+    background-color: rgba(34, 197, 94, 0.1);
+    transform: scale(1.1);
+}
+.faq-item button {
+    transition: all 0.4s ease;
+}
+.faq-number {
+    font-size: 16px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.2);
+    transition: color 0.4s ease;
+}
+.faq-item h3 {
+    transition: color 0.4s ease;
+}
+.faq-icon-wrapper {
+    width: 32px;
+    height: 32px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.4s ease;
+}
+.faq-icon {
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.faq-item button.active .faq-number,
+.faq-item button.active h3 {
+    color: #22c55e;
+}
+.faq-item button.active .faq-icon-wrapper {
+    border-color: #22c55e;
+    transform: rotate(180deg);
+}
+.faq-item button.active .faq-icon {
+    transform: rotate(135deg);
+}
+.faq-item.active-card {
+    border-color: rgba(34, 197, 94, 0.4);
+}
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-in-out;
+}
+.faq-answer-content {
+    padding: 0 2rem 1.5rem 5.5rem;
+}
+.faq-answer-content p {
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.7;
+}
+
+
+/* Loader */
+.bork-loader {
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-top-color: #16a34a;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Smooth Scroll */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 300;
+    letter-spacing: -0.02em;
+}
+
+.display-font {
+    font-weight: 200;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+}
+
+/* Micro-interactions */
+a, button {
+    cursor: pointer;
+}
+
+::selection {
+    background: rgba(22, 163, 74, 0.3);
+    color: #fff;
+}
+
+/* Focus States */
+*:focus-visible {
+    outline: 2px solid #16a34a; /* Зеленая обводка в стиле сайта */
+    outline-offset: 2px;
+}
+
+input:focus, textarea:focus {
+    border-color: rgba(22, 163, 74, 0.5);
+}
+
+/* WhatsApp Button */
+.whatsapp-float {
+    transition: all var(--duration-slow) var(--ease-bork);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.whatsapp-float:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+}
+/* СТИЛИ ДЛЯ СЕКЦИИ "ДОРОЖНАЯ КАРТА" */
+.roadmap-container {
+    padding-left: 40px; /* Отступ слева для текста */
+    position: relative;
+    max-width: 600px; /* Ограничиваем ширину для лучшего вида */
+    margin: 0 auto; /* Центрируем контейнер */
+}
+
+.roadmap-container::before {
+    content: '';
+    position: absolute;
+    left: 15px; /* Позиционируем линию по центру иконки (32px / 2 - 1px) */
+    top: 15px;
+    bottom: 15px;
+    width: 1px;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.roadmap-item {
+    position: relative;
+    padding-bottom: 4rem; /* Отступ между элементами */
+}
+
+.roadmap-item:last-child {
+    padding-bottom: 0;
+}
+
+.roadmap-icon {
+    position: absolute;
+    left: 0; 
+    transform: translateX(-50%); /* Точное центрирование иконки на линии */
+    top: 0;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.roadmap-icon-completed {
+    background-color: #16a34a;
+    border: 1px solid #16a34a;
+    color: #fff;
+    box-shadow: 0 0 20px rgba(22, 163, 74, 0.3);
+}
+
+.roadmap-icon-upcoming {
+    background-color: #000;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.roadmap-content {
+    padding-left: 2rem; /* Отступ для контента от иконки */
+}
+
+.roadmap-date {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.4);
+    margin-bottom: 0.5rem;
+}
+
+.roadmap-title {
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+    color: #fff;
+}
+
+.roadmap-title-completed {
+    color: #16a34a;
+}
+
+.roadmap-description {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.7;
+}
+/* НОВЫЕ СТИЛИ ДЛЯ КАРТОЧЕК КОМАНДЫ */
+.team-card-name {
+    font-size: 20px;
+    font-weight: 500;
+    color: #fff;
+    margin-bottom: 0.5rem;
+}
+
+.team-card-title {
+    font-size: 13px;                 /* Чуть меньше */
+    font-weight: 600;                /* Жирнее */
+    color: #22c55e;
+    text-transform: uppercase;       /* ВЕРХНИЙ РЕГИСТР */
+    letter-spacing: 0.05em;          /* Больше расстояние между буквами */
+    margin-bottom: 1rem;
+}
+
+.team-card-description {
+    font-size: 15px;
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.7;
+}
+/* НОВЫЕ СТИЛИ ДЛЯ УЛУЧШЕННОГО КАЛЬКУЛЯТОРА */
+.calc-label {
+    display: block;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 0.75rem;
+}
+
+.calc-slider-value {
+    color: #fff;
+    font-weight: 500;
+}
+
+.calc-select {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: #fff;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 0.5rem center;
+    background-repeat: no-repeat;
+    background-size: 1.5em 1.5em;
+}
+
+.calc-slider {
+    width: 100%;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.1);
+    outline: none;
+    border-radius: 3px;
+}
+
+.calc-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background: #3b82f6;
+    cursor: pointer;
+    border-radius: 50%;
+    border: 3px solid #000;
+}
+
+.calc-slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background: #3b82f6;
+    cursor: pointer;
+    border-radius: 50%;
+     border: 3px solid #000;
+}
+
+#results-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    min-height: 300px;
+}
+
+.result-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+.result-label {
+    flex-basis: 30%;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.6);
+}
+.result-bar-container {
+    flex-grow: 1;
+    background-color: rgba(255, 255, 255, 0.05);
+    height: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+}
+.result-bar {
+    height: 100%;
+    width: 0%;
+    background: #3b82f6;
+    border-radius: 4px;
+    transition: width 1s var(--ease-out-expo);
+}
+.result-value {
+    flex-basis: 25%;
+    text-align: right;
+    font-size: 16px;
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+}
+/* Стили для калькулятора */
+.calc-label {
+    display: block;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 0.75rem;
+}
+
+.calc-slider-value {
+    color: #fff;
+    font-weight: 500;
+    margin-left: 1rem;
+}
+
+.calc-select {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: #fff;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 0.5rem center;
+    background-repeat: no-repeat;
+    background-size: 1.5em 1.5em;
+}
+
+.calc-slider {
+    width: 100%;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.1);
+    outline: none;
+    border-radius: 3px;
+}
+
+.calc-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background: #3b82f6;
+    cursor: pointer;
+    border-radius: 50%;
+    border: 3px solid #000;
+}
+
+.calc-slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background: #3b82f6;
+    cursor: pointer;
+    border-radius: 50%;
+    border: 3px solid #000;
+}
+
+.result-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.result-label {
+    flex-basis: 30%;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.result-bar-container {
+    flex-grow: 1;
+    background-color: rgba(255, 255, 255, 0.05);
+    height: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.result-bar {
+    height: 100%;
+    width: 0;
+    background: #3b82f6;
+    border-radius: 4px;
+    transition: width 1s cubic-bezier(0.19, 1, 0.22, 1); /* Плавная анимация */
+}
+
+.result-value {
+    flex-basis: 25%;
+    text-align: right;
+    font-size: 16px;
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+}
+
+/* Лоадер (если не было) */
+.bork-loader {
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-top-color: #16a34a;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+/* Финальные упрощенные стили для кнопки "Наверх" */
+.bork-back-to-top {
+    /* Координаты теперь в HTML, здесь они не нужны */
+    width: 3rem;
+    height: 3rem;
+    
+    /* Эффект "матового стекла" */
+    background-color: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    
+    /* Начальное состояние для анимации */
+    opacity: 0;
+    transform: translateY(10px);
+    pointer-events: none;
+    
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .bork-back-to-top:hover {
+    border-color: #16a34a;
+    background-color: rgba(22, 163, 74, 0.2);
+  }
+  
+  .bork-back-to-top.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+/* Стили для анимированных "шаров" авроры */
+.aurora-blob {
+    position: fixed; /* или absolute, если нужно, чтобы прокручивалось */
+    border-radius: 50%;
+    filter: blur(100px); /* Сильное размытие для мягкого свечения */
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.25; /* Полупрозрачность */
+  }
+/* Анимация, которая двигает фон */
+
+/* ===== AURORA BACKGROUND ANIMATION ===== */
+
+/* Main container */
+.aurora-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    z-index: -1;
+    background: #000000;
+}
+
+/* Base aurora blob styles */
+.aurora-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(40px);
+    opacity: 0.4;
+}
+
+/* Blob 1 - Green primary */
+.aurora-blob-1 {
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle at center, rgba(34, 197, 94, 0.3) 0%, transparent 50%);
+    top: -200px;
+    left: -100px;
+    animation: moveBlob1 45s ease-in-out infinite;
+}
+
+/* Blob 2 - Blue primary */
+.aurora-blob-2 {
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle at center, rgba(59, 130, 246, 0.3) 0%, transparent 50%);
+    top: 20%;
+    right: -150px;
+    animation: moveBlob2 60s ease-in-out infinite;
+}
+
+/* Blob 3 - Teal accent */
+.aurora-blob-3 {
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle at center, rgba(20, 184, 166, 0.3) 0%, transparent 50%);
+    bottom: -100px;
+    left: 20%;
+    animation: moveBlob3 50s ease-in-out infinite;
+}
+
+/* Blob 4 - Cyan center */
+.aurora-blob-4 {
+    width: 700px;
+    height: 700px;
+    background: radial-gradient(circle at center, rgba(6, 182, 212, 0.2) 0%, transparent 60%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: moveBlob4 70s ease-in-out infinite;
+}
+
+/* Light streaks */
+.aurora-blob-5 {
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent 0%, rgba(34, 197, 94, 0.4) 50%, transparent 100%);
+    top: 30%;
+    left: -100%;
+    filter: blur(2px);
+    animation: streak1 30s linear infinite;
+}
+
+.aurora-blob-6 {
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent 0%, rgba(59, 130, 246, 0.4) 50%, transparent 100%);
+    bottom: 40%;
+    right: -100%;
+    filter: blur(2px);
+    animation: streak2 40s linear infinite;
+}
+
+/* Gradient overlay */
+.aurora-gradient {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at bottom, transparent 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0.8) 100%);
+    pointer-events: none;
+}
+
+/* ===== KEYFRAME ANIMATIONS ===== */
+
+@keyframes moveBlob1 {
+    0%, 100% {
+        transform: translate(0, 0) scale(1) rotate(0deg);
+    }
+    25% {
+        transform: translate(100px, 50px) scale(1.1) rotate(90deg);
+    }
+    50% {
+        transform: translate(50px, 100px) scale(0.9) rotate(180deg);
+    }
+    75% {
+        transform: translate(-50px, 50px) scale(1.05) rotate(270deg);
+    }
+}
+
+@keyframes moveBlob2 {
+    0%, 100% {
+        transform: translate(0, 0) scale(1) rotate(0deg);
+    }
+    25% {
+        transform: translate(-80px, -40px) scale(0.95) rotate(-90deg);
+    }
+    50% {
+        transform: translate(-100px, 60px) scale(1.1) rotate(-180deg);
+    }
+    75% {
+        transform: translate(-30px, -80px) scale(1) rotate(-270deg);
+    }
+}
+
+@keyframes moveBlob3 {
+    0%, 100% {
+        transform: translate(0, 0) scale(1) rotate(0deg);
+    }
+    25% {
+        transform: translate(60px, -60px) scale(1.15) rotate(120deg);
+    }
+    50% {
+        transform: translate(-40px, -100px) scale(0.85) rotate(240deg);
+    }
+    75% {
+        transform: translate(80px, -40px) scale(1.05) rotate(360deg);
+    }
+}
+
+@keyframes moveBlob4 {
+    0%, 100% {
+        transform: translate(-50%, -50%) scale(1) rotate(0deg);
+    }
+    33% {
+        transform: translate(-45%, -55%) scale(1.05) rotate(60deg);
+    }
+    66% {
+        transform: translate(-55%, -45%) scale(0.95) rotate(-60deg);
+    }
+}
+
+@keyframes streak1 {
+    0% {
+        transform: translateX(0) scaleX(0.5);
+    }
+    100% {
+        transform: translateX(200%) scaleX(1.5);
+    }
+}
+
+@keyframes streak2 {
+    0% {
+        transform: translateX(0) scaleX(0.5);
+    }
+    100% {
+        transform: translateX(-200%) scaleX(1.5);
+    }
+}
+
+/* Pulse animation for the background */
+.aurora-background::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 200%;
+    height: 200%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle at center, rgba(34, 197, 94, 0.05) 0%, transparent 50%);
+    animation: pulse 10s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 0.3;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    50% {
+        opacity: 0.6;
+        transform: translate(-50%, -50%) scale(1.1);
+    }
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .aurora-blob-1 { width: 400px; height: 400px; }
+    .aurora-blob-2 { width: 350px; height: 350px; }
+    .aurora-blob-3 { width: 300px; height: 300px; }
+    .aurora-blob-4 { width: 500px; height: 500px; }
+    
+    .aurora-blob {
+        filter: blur(30px);
+    }
+    
+    .aurora-blob-5, .aurora-blob-6 {
+        display: none;
+    }
+}
+
+/* ===== PERFORMANCE ===== */
+@media (prefers-reduced-motion: reduce) {
+    .aurora-blob,
+    .aurora-blob-5,
+    .aurora-blob-6,
+    .aurora-background::before {
+        animation: none;
+    }
+}
+/* --- Стили для нового FAQ --- */
+.faq-item button {
+    transition: all 0.4s ease;
+}
+
+/* Стили для номера вопроса */
+.faq-number {
+    font-size: 16px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.2);
+    transition: color 0.4s ease;
+}
+
+/* Стили для заголовка вопроса */
+.faq-item h3 {
+    transition: color 0.4s ease;
+}
+
+/* Иконка в кружке */
+.faq-icon-wrapper {
+    width: 32px;
+    height: 32px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.4s ease;
+}
+
+.faq-icon {
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* -- Стили для АКТИВНОГО состояния -- */
+
+.faq-item button.active .faq-number {
+    color: #22c55e; /* Зеленый цвет для номера */
+}
+
+.faq-item button.active h3 {
+    color: #22c55e; /* Зеленый цвет для заголовка */
+}
+
+.faq-item button.active .faq-icon-wrapper {
+    border-color: #22c55e;
+    transform: rotate(180deg);
+}
+
+.faq-item button.active .faq-icon {
+    transform: rotate(135deg); /* Превращает + в X */
+}
+
+/* Стили для панели ответа */
+.faq-answer-content {
+    padding-left: 5rem; /* Отступ слева, чтобы текст был под заголовком */
+    padding-right: 5rem; /* Отступ справа для симметрии */
+}
+/* --- Стилизация скроллбара --- */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #000;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    border: 2px solid #000;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+/* --- ФИНАЛЬНЫЕ СТИЛИ КНОПОК (версия 3.0) --- */
+
+/* Общий стиль для кнопок */
+.btn-final {
+    display: inline-block;
+    padding: 1rem 2.5rem; /* Увеличили отступы (было 0.8rem 2.2rem) */
+    border-radius: 9999px;
+    font-size: 16px; /* Увеличили шрифт (было 14px) */
+    font-weight: 600;
+    text-align: center;
+    transition: all 0.25s ease-in-out;
+    border: 1px solid transparent;
+}
+
+/* 1. Основная кнопка (белая) */
+.btn-final-primary {
+    background-color: #fff;
+    color: #111827; /* Темно-серый текст */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.btn-final-primary:hover {
+    transform: scale(1.05) translateY(-2px);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* --- ФИНАЛЬНЫЕ СТИЛИ ДЛЯ ВТОРОСТЕПЕННОЙ КНОПКИ С АНИМАЦИЕЙ --- */
+
+.btn-final-secondary {
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    /* Убедимся, что все свойства анимируются плавно */
+    transition: all 0.3s ease-in-out;
+}
+
+/* Эффект при НАВЕДЕНИИ */
+.btn-final-secondary:hover {
+    /* 1. Эффект "дыхания" (небольшое увеличение) */
+    transform: scale(1.03);
+    /* 2. Мягкое свечение в фирменном цвете */
+    box-shadow: 0 0 25px rgba(34, 197, 94, 0.5);
+    border-color: rgba(255, 255, 255, 0.4);
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Эффект при НАЖАТИИ */
+.btn-final-secondary:active {
+    /* 1. Убираем увеличение и "утапливаем" кнопку */
+    transform: scale(1);
+    /* 2. Убираем свечение и добавляем внутреннюю тень для эффекта нажатия */
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+    /* 3. Нажатие должно быть быстрым */
+    transition-duration: 0.1s;
+}
+/* Фикс для зазора между секциями */
+.hero-gap-fix {
+    margin-bottom: -2px !important;
+}
+/* --- Стили для иконок контактов в футере --- */
+.contact-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    color: rgba(255, 255, 255, 0.6);
+    transition: all 0.3s ease;
+}
+
+.contact-icon:hover {
+    background-color: #22c55e;
+    border-color: #22c55e;
+    color: #fff;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(34, 197, 94, 0.2);
+}
+/* --- Иконка почты в навигации (уменьшенная) --- */
+.contact-icon-nav {
+    width: 36px;
+    height: 36px;
+}
+.contact-icon-nav svg {
+    width: 1.1rem; /* 18px */
+    height: 1.1rem;
+}
